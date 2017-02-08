@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sanskiriti Chatar patar</title>	
+</head>
+<script src="/socket.io/socket.io.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="controller.js"></script>
+<body ng-app="app">
+<div ng-controller="ctr">
+ <div ng-hide="first">
+	<input type="text" ng-model="uname"  placeholder="Your username"/>
+	<button type="button" name="button" ng-click="setUsername()">chat- pat</button>
+    <div ng-model="result"></div>
+ </div>
+ <div ng-hide="second">
+     <input type="textarea" placeholder="Your msg" ng-model="message"/>
+     <button ng-click="send()">Send</button>
+ </div>
+</div>
+</body>
+</html>

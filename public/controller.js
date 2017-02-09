@@ -9,14 +9,15 @@ app.controller('ctr',function($scope){
     $scope.second=true;
 
     $scope.setUsername=function(){
-            socket.emit('setUsername',$scope.uname );
+
+            socket.emit('setUsername2',$scope.uname);
         };
 
      socket.on('userExists', function(data){
-            $scope.result = data;
+            $scope.result=data;
         });
         socket.on('userSet', function(data){
-            user = data.username;
+           console.log("common");    
             $scope.first=true;
             $scope.second=false;
         });

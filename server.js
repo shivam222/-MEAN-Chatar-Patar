@@ -13,14 +13,15 @@ users=[];
 
 io.on('connection',function(socket){
    console.log("A user just arrived");
-   socket.on('setUsername',function(data){
+   socket.on('setUsername2',function(data){
+   	   if(users.indexOf(data)<0){
 
-   	   if(users.indexOf(data)>-1){
    	   	 users.push(data);
    	   	 socket.emit('userSet',{username:data});
    	   }
    	   else{
    	   	 socket.emit('userExists',data+'is already taken');
+   	   	 
    	   }
    })
 });

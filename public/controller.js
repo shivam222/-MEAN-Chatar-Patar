@@ -16,10 +16,19 @@ app.controller('ctr',function($scope){
      socket.on('userExists', function(data){
             $scope.result=data;
         });
-        socket.on('userSet', function(data){
-           console.log("common");    
+     socket.on('userSet', function(data){    
             $scope.first=true;
             $scope.second=false;
         });
+     $scope.send=function(){
+            if($scope.message!=''){
+                socket.emit('msg', {message: $scope.message, user: user});
+            }
+        }
+         $scope.master='';
+     socket.on('newmsg',function(data){
+             $scope.master+=data.message;
+     });
+
 });
 

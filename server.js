@@ -23,7 +23,10 @@ io.on('connection',function(socket){
    	   	 socket.emit('userExists',data+'is already taken');
    	   	 
    	   }
-   })
+  })
+    socket.on('msg', function(data){
+       io.sockets.emit('newmsg', data);
+  })
 });
 
 http.listen(8081,function(){

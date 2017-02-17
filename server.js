@@ -10,7 +10,7 @@ app.get('/',function(req,res){
 });
 
 users=[];
-
+msgs=[];
 io.on('connection',function(socket){
    console.log("A user just arrived");
    socket.on('setUsername2',function(data){
@@ -25,7 +25,9 @@ io.on('connection',function(socket){
    	   }
   })
     socket.on('msg', function(data){
-       io.sockets.emit('newmsg', data);
+      // io.sockets.emit('newmsg', data);
+       msgs.push(data.user+':'+data.message);
+        io.sockets.emit('newmsg', msgs);
   })
 });
 

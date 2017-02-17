@@ -10,13 +10,13 @@
 <div ng-controller="ctr">
  <div ng-hide="first">
 	<input type="text" ng-model="uname"  placeholder="Your username"/>
-	<button type="button" name="button" ng-click="setUsername()">chat- pat</button>
+	<button type="button" name="button"  ng-click="setUsername()">chat- pat</button>
     <div>{{result}}</div>
  </div>
  <div ng-hide="second">
      <input type="textarea" placeholder="Your msg" ng-model="message"/>
      <button ng-click="send()">Send</button>
-     <div>{{master}}</div>
+     <div ng-repeat="some in master track by $index">{{some}}</div>
  </div>
 </div>
 </body>

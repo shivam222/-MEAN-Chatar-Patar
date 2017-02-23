@@ -2,8 +2,12 @@ var express=require('express');
 var app=express();
 var http=require('http').Server(app);
 var io=require('socket.io')(http);
+var mongojs=require('mongojs');
+var db=mongojs('chatapp',['chatapp']);
+var bodyParser=require('body-parser');
 
 app.use(express.static(__dirname+"/public"));
+app.use(bodyParser.json());
 
 app.get('/',function(req,res){
   res.sendfile('index.html');
@@ -12,17 +16,28 @@ app.get('/',function(req,res){
 users=[];
 msgs=[];
 io.on('connection',function(socket){
-   console.log("A user just arrived");
-   socket.on('setUsername2',function(data){
-   	   if(users.indexOf(data)<0){
 
-   	   	 users.push(data);
-   	   	 socket.emit('userSet',{username:data});
-   	   }
-   	   else{
-   	   	 socket.emit('userExists',data+'is already taken');
-   	   	 
-   	   }
+   
+   socket.on('setUsername2',function(data){
+      var isSet=0;
+      var cursor=db.chatapp.find(function(err,docs){
+           
+           docs.forEach(myfunction);
+
+           function myfunction(item){
+                    if(data==item.uname){
+                    	 isSet=1;
+                    }
+           }
+           if(isSet==0){
+           	 socket.emit('userSet',{username:data});
+           }
+           else{
+           	   socket.emit('userExists',data+'is already taken');
+           }
+           
+      })
+
   })
     socket.on('msg', function(data){
       // io.sockets.emit('newmsg', data);

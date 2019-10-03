@@ -40,7 +40,6 @@ io.on('connection',function(socket){
 
   })
     socket.on('msg', function(data){
-      // io.sockets.emit('newmsg', data);
        msgs.push(data.user+':'+data.message);
         io.sockets.emit('newmsg', msgs);
   })
